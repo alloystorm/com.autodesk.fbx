@@ -14,6 +14,7 @@
 %rename("%s") FbxGeometry::GetDeformer;
 %rename("%s") FbxGeometry::GetDeformerCount;
 %rename("%s") FbxGeometry::GetBlendShapeDeformer;
+%rename("%s") FbxGeometry::GetSkinDeformer;
 #endif
 
 %extend FbxGeometry {
@@ -21,6 +22,12 @@
     {
         FbxDeformer* deformer = $self->GetDeformer(pIndex, FbxDeformer::eBlendShape, pStatus);
         return FbxCast<FbxBlendShape>(deformer);
+    }
+
+    FbxSkin* GetSkinDeformer(int pIndex, FbxStatus* pStatus=NULL) const
+    {
+        FbxDeformer* deformer = $self->GetDeformer(pIndex, FbxDeformer::eSkin, pStatus);
+        return FbxCast<FbxSkin>(deformer);
     }
 }
 %include "fbxsdk/scene/geometry/fbxgeometry.h"
