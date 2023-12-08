@@ -1,3 +1,4 @@
+.vscode
 build-win
 swigwin-3.0.12
 build_local.cmd

@@ -100,13 +100,14 @@
 %rename("%s") FbxProperty::GetSrcObject(const int pIndex=0) const;
 %rename("FindSrcObjectInternal") FbxProperty::FindSrcObject(const char* pName, const int pStartIndex) const;
 %csmethodmodifiers FbxProperty::FindSrcObject "private";
-%extend FbxProperty { %proxycode %{
-  public FbxObject FindSrcObject(string pName, int pStartIndex = 0) {
-    if (pName == null) { throw new System.ArgumentNullException("pName"); }
-    return FindSrcObjectInternal(pName, pStartIndex);
-  }
-%} }
-
+%extend FbxProperty { 
+  %proxycode %{
+    public FbxObject FindSrcObject(string pName, int pStartIndex = 0) {
+      if (pName == null) { throw new System.ArgumentNullException("pName"); }
+      return FindSrcObjectInternal(pName, pStartIndex);
+    }
+  %} 
+}
 
 %rename("%s") FbxProperty::ConnectDstObject;
 %rename("%s") FbxProperty::IsConnectedDstObject;
@@ -140,6 +141,8 @@
 %rename("%s") FbxProperty::GetCurveNode;
 %rename("%s") FbxProperty::GetInt;
 %rename("%s") FbxProperty::GetFbxColor;
+%rename("%s") FbxProperty::GetTextureObjectCount;
+%rename("%s") FbxProperty::GetTextureObject;
 
 %extend FbxProperty {
     float GetFloat () const { return $self->Get<float>(); }
@@ -149,6 +152,12 @@
     FbxString GetString () const { return $self->Get<FbxString>(); }
     FbxColor GetFbxColor () const { return $self->Get<FbxColor>(); }
     int GetInt() const { return $self->Get<int>(); }
+    int GetTextureObjectCount() const {
+      return $self->GetSrcObjectCount<FbxTexture>();
+    }
+    FbxTexture* GetTextureObject(int index) const {
+      return $self->GetSrcObject<FbxTexture>(index);
+    }
 }
 
 %rename("%s") FbxPropertyT::Get;
