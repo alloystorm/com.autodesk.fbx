@@ -44,6 +44,16 @@
 %ignore FbxTexture::ECoordinates;
 %ignore FbxTexture::EAlignMode;
 
+%rename("%s") FbxTexture::GetFileTexture;
+%extend FbxTexture {
+    FbxFileTexture* GetFileTexture() {
+        if (self->Is<FbxFileTexture>()) {
+            return FbxCast<FbxFileTexture>(self);
+        }
+        return nullptr;
+    }
+}
+
 %include "fbxsdk/scene/shading/fbxtexture.h"
 %include "fbxsdk/scene/shading/fbxfiletexture.h"
 
