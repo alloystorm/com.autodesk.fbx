@@ -143,6 +143,8 @@
 %rename("%s") FbxProperty::GetFbxColor;
 %rename("%s") FbxProperty::GetTextureObjectCount;
 %rename("%s") FbxProperty::GetTextureObject;
+%rename("%s") FbxProperty::GetAnimStackCount;
+%rename("%s") FbxProperty::GetAnimStack;
 
 %extend FbxProperty {
     float GetFloat () const { return $self->Get<float>(); }
@@ -157,6 +159,12 @@
     }
     FbxTexture* GetTextureObject(int index) const {
       return $self->GetSrcObject<FbxTexture>(index);
+    }
+    int GetAnimStackCount() const {
+      return $self->GetSrcObjectCount<FbxAnimStack>();
+    }
+    FbxAnimStack* GetAnimStack(int index) const {
+      return $self->GetSrcObject<FbxAnimStack>(index);
     }
 }
 
