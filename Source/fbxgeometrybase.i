@@ -19,6 +19,8 @@
 %rename("%s") FbxGeometryBase::CreateElementMaterial;
 %rename("%s") FbxGeometryBase::CreateElementVertexColor;
 %rename("%s") FbxGeometryBase::CreateElementUV;
+%rename("%s") FbxGeometryBase::GetElementMaterial(int pIndex);
+%rename("%s") FbxGeometryBase::GetElementMaterialCount;
 
 #endif
 
